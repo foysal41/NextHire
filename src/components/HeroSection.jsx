@@ -111,7 +111,7 @@ function HeroSection() {
         </div>
       </div>
 
-      <div className="relative z-20 mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 pb-12 sm:grid-cols-2 sm:px-6 lg:-mt-24 lg:grid-cols-4 lg:pb-16">
+      <div className="relative z-20 mt-0 md:-mt-[300px] mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 pb-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:pb-16">
         {stats.map((item) => (
           <Card
             key={item.label}
