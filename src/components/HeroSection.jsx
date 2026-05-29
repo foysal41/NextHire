@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Button, Chip, Input, Card } from "@heroui/react";
 import { Icon } from "@gravity-ui/uikit";
+
 import {
   Magnifier,
   MapPin,
@@ -47,7 +48,7 @@ function HeroSection() {
             placeholder="Job title, skill or company"
             variant="bordered"
             startContent={<Icon data={Magnifier} size={18} />}
-            classNames={{
+            className={{
               base: "w-full",
               inputWrapper: "border-0 bg-transparent shadow-none",
               input: "text-white placeholder:text-white/40",
@@ -60,7 +61,7 @@ function HeroSection() {
             placeholder="Location or Remote"
             variant="bordered"
             startContent={<Icon data={MapPin} size={18} />}
-            classNames={{
+            className={{
               base: "w-full",
               inputWrapper: "border-0 bg-transparent shadow-none",
               input: "text-white placeholder:text-white/40",
