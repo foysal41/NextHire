@@ -81,14 +81,14 @@ function Navbar() {
         {/* Desktop Right Side */}
         <div className="hidden items-center gap-5 md:flex">
           <Link
-            href="/signin"
+            href="/auth/signin"
             className="text-sm font-semibold text-black transition hover:text-[#5120E2]"
           >
             Sign In
           </Link>
 
           <Link
-            href="/signup"
+            href="/auth/signup"
             className="rounded-full bg-[#5120E2] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#4219bd]"
           >
             Get Started
@@ -114,7 +114,7 @@ function Navbar() {
 
             <li className="pt-2">
               <Link
-                href="/signin"
+                href="/auth/signin"
                 className="block rounded-xl px-4 py-3 text-sm font-semibold text-black"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -124,7 +124,7 @@ function Navbar() {
 
             <li>
               <Link
-                href="/signup"
+                href="/auth/signup"
                 className="block w-full rounded-full bg-[#5120E2] px-6 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#4219bd]"
                 onClick={() => setIsMenuOpen(false)}
               >

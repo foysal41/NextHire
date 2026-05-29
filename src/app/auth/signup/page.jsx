@@ -93,17 +93,7 @@ export default function SignupPage() {
             className="h-12 w-full rounded-xl border border-transparent bg-transparent px-3 text-sm text-white outline-none placeholder:text-white/45 focus:border-white/10 focus:bg-white/5"
           />
 
-          {/*    {error && (
-            <p className="rounded-xl bg-red-500/10 px-4 py-3 text-sm text-red-400">
-              {error}
-            </p>
-          )}
-
-          {success && (
-            <p className="rounded-xl bg-green-500/10 px-4 py-3 text-sm text-green-400">
-             {success} 
-            </p>
-          )} */}
+      
 
           <Button
             type="submit"
