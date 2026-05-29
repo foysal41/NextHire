@@ -86,19 +86,19 @@ function SignInPage() {
             type="submit"
             className="h-12 w-full rounded-xl bg-[#2F96EE] text-sm font-semibold text-white hover:bg-[#2388df]"
           >
-            Sign Up for Free
+            Sign In
           </Button>
         </form>
 
         <div className="my-6 h-px bg-white/10" />
 
         <p className="text-center text-sm text-white/45">
-          Already have an account?{" "}
+          Dont Have an account? {" "}
           <Link
-            href="/auth/signin"
+            href="/auth/signup"
             className="font-semibold text-[#5CB8FF] underline"
           >
-            Sign in instead
+            Sign Up instead
           </Link>
         </p>
       </Card>
