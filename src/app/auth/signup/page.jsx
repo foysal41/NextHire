@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import { Button, Card } from "@heroui/react";
-import { authClient } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 export default function SignupPage() {
   const router = useRouter();
+  const {data:session, isPending} = useSession();
+console.log(session?.user)
 
   const formSubmit = async (e) => {
     e.preventDefault();
@@ -15,8 +17,10 @@ export default function SignupPage() {
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
 
+    
+
     //Form field validation
-    if (!user.name | !user.email | !user.password) {
+    if (!user.name | !user.email | !user.password || !user.role) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -43,6 +47,7 @@ export default function SignupPage() {
       name: user.name,
       email: user.email,
       password: user.password,
+      role:user.role,
     });
 
     if (error) {
@@ -93,7 +98,21 @@ export default function SignupPage() {
             className="h-12 w-full rounded-xl border border-transparent bg-transparent px-3 text-sm text-white outline-none placeholder:text-white/45 focus:border-white/10 focus:bg-white/5"
           />
 
-      
+      <div className="space-y-3">
+        <p  className="text-sm font-medium text-white/70" >Select Your Role</p>
+        <div className="flex gap-4">
+          <label className="flex items-center gap-2 text-sm text-white/70 cursor-pointer">
+            <input type="radio" name="role" value='seeker' defaultChecked  className="accent-[#2F96EE]"/>
+            Seeker
+          </label>
+
+           <label className="flex items-center gap-2 text-sm text-white/70 cursor-pointer">
+            <input type="radio" name="role" value='recruiter'   className="accent-[#2F96EE]"/>
+            Recruiter
+          </label>
+
+        </div>
+      </div>
 
           <Button
             type="submit"
