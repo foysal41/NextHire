@@ -13,7 +13,7 @@ export function DashboardSidebar() {
     {icon: Gear, label: "Settings"},
   ];
 
-  const navContent =       <nav className="flex flex-col gap-1">
+  const navContent =   <nav className="flex flex-col gap-1">
                 {navItems.map((item) => (
                   <button
                     key={item.label}
@@ -44,7 +44,7 @@ export function DashboardSidebar() {
               <Drawer.Heading>Navigation</Drawer.Heading>
             </Drawer.Header>
             <Drawer.Body>
-                <navContent></navContent>
+                 {navContent}
             </Drawer.Body>
           </Drawer.Dialog>
         </Drawer.Content>

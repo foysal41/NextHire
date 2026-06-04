@@ -3,9 +3,14 @@ import React from 'react'
 
 function DashboardLayout({children}) {
   return (
-    <div>
-        <DashboardSidebar></DashboardSidebar>
-        <div>{children}</div>
+     <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <DashboardSidebar />
+
+      {/* Main Content */}
+      <main className="flex-1 p-6">
+        {children}
+      </main>
     </div>
   )
 }
