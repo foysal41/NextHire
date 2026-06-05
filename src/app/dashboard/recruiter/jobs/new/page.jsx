@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import { Card, Input, Button } from "@heroui/react";
+import { createJob } from "@/lib/actions/jobs";
+import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
+
+
 
 export default function NewJob() {
   const [loading, setLoading] = useState(false);
@@ -20,17 +25,27 @@ export default function NewJob() {
       visibility: "public",
     };
 
-    console.log(payload);
-
-    try {
-      setLoading(true);
-      alert("Job Created Successfully");
-    } catch (error) {
-      console.error(error);
-      alert("Failed to create job");
-    } finally {
-      setLoading(false);
+    // console.log(payload);
+    const res = await createJob(payload)
+    if(res.insertedId){
+      toast.success("Job Posted Successfully")
+      e.target.reset();
+      setIsRemote(false)
+      redirect("/dashboard/recruiter")
     }
+
+
+
+
+    // try {
+    //   setLoading(true);
+    //   alert("Job Created Successfully");
+    // } catch (error) {
+    //   console.error(error);
+    //   alert("Failed to create job");
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   return (
@@ -93,8 +108,8 @@ export default function NewJob() {
 
               <Input type="number" name="salaryMin" label="Minimum Salary" placeholder="30000" />
               <Input type="number" name="salaryMax" label="Maximum Salary" placeholder="80000" />
-              <Input name="city" label="City" placeholder="Dhaka" isDisabled={isRemote} />
-              <Input name="country" label="Country" placeholder="Bangladesh" isDisabled={isRemote} />
+              <Input name="city" label="City" placeholder="Dhaka" disabled={isRemote} />
+              <Input name="country" label="Country" placeholder="Bangladesh" disabled={isRemote} />
               <Input type="date" name="deadline" label="Application Deadline" />
 
               <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 px-4 py-3">
