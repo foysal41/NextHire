@@ -21,6 +21,7 @@ export default function NewJob() {
     const payload = {
       ...data,
       isRemote,
+      companyId: "company_123",
       status: "active",
       visibility: "public",
     };
@@ -46,6 +47,10 @@ export default function NewJob() {
     // } finally {
     //   setLoading(false);
     // }
+
+
+
+
   };
 
   return (
