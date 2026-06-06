@@ -55,7 +55,7 @@ export default function NewJob() {
 
   return (
     <section className="min-h-screen bg-white p-4 md:p-8">
-      <Card className="mx-auto max-w-6xl rounded-3xl border border-gray-200 bg-white p-6 shadow-sm md:p-8">
+      <Card className="mx-auto   border border-gray-200 bg-white p-6 shadow-sm md:p-8">
         <div className="border-b border-gray-200 pb-6">
           <h1 className="text-3xl font-bold text-gray-950">
             Create New Job
