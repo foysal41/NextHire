@@ -5,6 +5,7 @@ import { Card, Input, Button } from "@heroui/react";
 import { Icon } from "@gravity-ui/uikit";
 import { Xmark, MapPin, ArrowUpFromLine, Pencil } from "@gravity-ui/icons";
 import Image from "next/image";
+import { createCompany } from "@/lib/api/companies";
 
 const formLabelClass = "mb-2 block text-sm font-medium text-gray-700";
 
@@ -235,6 +236,11 @@ function RecruiterCompany() {
        status: companyProfile?.status || "Pending",
     };
 
+
+    const payload = await createCompany(companyData)
+    if(payload.insertId){
+      toast.success("Company Profile created Successfully");
+    }
   //   console.log("DEBUG 11 - Final Company Data:", companyData);
 
     /*
