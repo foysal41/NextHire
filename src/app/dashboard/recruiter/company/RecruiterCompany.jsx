@@ -10,7 +10,7 @@ import { createCompany } from "@/lib/api/companies";
 
 const formLabelClass = "mb-2 block text-sm font-medium text-gray-700";
 
-function RecruiterCompany({recruiter}) {
+function RecruiterCompany({recruiter, recruiterCompany}) {
   /*
     STEP 1: Core State Section
     কেন লিখলাম?
@@ -20,7 +20,7 @@ function RecruiterCompany({recruiter}) {
     - logoUrl: ImgBB upload হওয়ার পর image URL এখানে save হবে
     - isUploading: image upload চলাকালীন loading text দেখানোর জন্য
   */
-  const [companyProfile, setCompanyProfile] = useState(null);
+  const [companyProfile, setCompanyProfile] = useState(recruiterCompany);
   const [isEditMode, setIsEditMode] = useState(false);
   const [errors, setErrors] = useState({});
   const [logoUrl, setLogoUrl] = useState("");

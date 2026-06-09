@@ -22,3 +22,6 @@ export const createCompany =async(newCompanyData) => {
     
     return res.json();
 }
+
+
+
