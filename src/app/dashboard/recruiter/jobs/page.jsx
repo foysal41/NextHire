@@ -2,6 +2,7 @@ import { getCompanyJob } from "@/lib/api/jobs";
 import { Icon } from "@gravity-ui/uikit";
 import { Eye, Pencil, TrashBin } from "@gravity-ui/icons";
 import React from "react";
+import { getLoggedInRecruiterCompany } from "@/lib/api/recruiterCompany";
 
 const getStatusStyle = (status) => {
   if (status === "active") {
@@ -16,8 +17,12 @@ const getStatusStyle = (status) => {
 };
 
 const RecruiterJobs = async () => {
-  const companyId = "company_123";
-  const jobs = await getCompanyJob(companyId);
+  const company = await getLoggedInRecruiterCompany();
+  console.log(company)
+
+  const jobs = await getCompanyJob(company._id);
+  console.log(jobs)
+
 
   return (
     <section className="p-4 md:p-8">

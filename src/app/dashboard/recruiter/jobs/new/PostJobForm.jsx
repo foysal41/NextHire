@@ -7,9 +7,12 @@ import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 
 
-
 export default function PostJobForm({company}) {
-  console.log(company)
+
+  // console.log(company)
+
+ 
+  
   const [loading, setLoading] = useState(false);
   const [isRemote, setIsRemote] = useState(false);
 
@@ -22,7 +25,7 @@ export default function PostJobForm({company}) {
     const payload = {
       ...data,
       isRemote,
-      companyId: "company_123",
+      companyId: company?._id,
       status: "active",
       visibility: "public",
     };
