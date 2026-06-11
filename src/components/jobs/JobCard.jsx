@@ -10,6 +10,7 @@ import {
   Code,
   Check,
 } from "@gravity-ui/icons";
+import Link from "next/link";
 
 export default function JobCard({ jobs = [] }) {
   return (
@@ -82,16 +83,17 @@ export default function JobCard({ jobs = [] }) {
             <p className="text-xs text-gray-400">
               Posted: {new Date(job.createdAt).toLocaleDateString()}
             </p>
+           
 
-            <Button
-              as="a"
-              href={`/jobs/${job._id || job.companyId}/apply`}
+            <Link
+              
+              href={`/jobs/${job._id || job.companyId}`}
               color="primary"
               radius="full"
               className="font-semibold"
             >
               Apply Now
-            </Button>
+            </Link>
           </Card.Footer>
         </Card>
       ))}
