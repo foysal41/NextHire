@@ -3,10 +3,15 @@ import Link from "next/link";
 import { Button, Card } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function SignInPage() {
       const router = useRouter();
+
+      const searchParams = useSearchParams();
+      const redirectTo = searchParams.get("redirect") || "/";
+      console.log("FULL URL:", window.location.href);
+console.log("redirectTo:", redirectTo);
   const formSubmit = async(e) => {
     e.preventDefault();
 
@@ -14,7 +19,7 @@ function SignInPage() {
     const user = Object.fromEntries(formData.entries());
 
     //form validation
-    if (!user.email | !user.password) {
+    if (!user.email || !user.password) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -44,8 +49,11 @@ function SignInPage() {
         return;
     }
 
-   toast.success("Account created successfully!");
-   router.push("/")
+   toast.success("Login successful!");
+   setTimeout(() => {
+  router.replace(redirectTo);
+  router.refresh();
+}, 500);
 
 
 
@@ -95,7 +103,7 @@ function SignInPage() {
         <p className="text-center text-sm text-white/45">
           Dont Have an account? {" "}
           <Link
-            href="/auth/signup"
+            href={`/auth/signup?redirect=${redirectTo}`}
             className="font-semibold text-[#5CB8FF] underline"
           >
             Sign Up instead

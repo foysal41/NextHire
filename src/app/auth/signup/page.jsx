@@ -12,7 +12,7 @@ console.log(session?.user)
 
 const searchparams = useSearchParams();
 
-const redirectUrl = searchparams.get("redirect") || '/';
+const redirectTo = searchparams.get("redirect") || '/';
 
   const formSubmit = async (e) => {
     e.preventDefault();
@@ -62,7 +62,8 @@ const redirectUrl = searchparams.get("redirect") || '/';
     toast.success("Account created successfully!");
     setTimeout(() => {
       router.push(redirectUrl);
-    }, 1000);
+      router.refresh();
+    }, 500);
   };
 
   return (
@@ -131,7 +132,7 @@ const redirectUrl = searchparams.get("redirect") || '/';
         <p className="text-center text-sm text-white/45">
           Already have an account?{" "}
           <Link
-            href="/auth/signin"
+            href={`/auth/signin?redirect=${redirectTo}`}
             className="font-semibold text-[#5CB8FF] underline"
           >
             Sign in instead
