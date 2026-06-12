@@ -9,6 +9,7 @@ import {
   Check,
 } from "@gravity-ui/icons";
 import { getJobById } from "@/lib/api/jobs";
+import Link from "next/link";
 
 async function Page({ params }) {
   const { id } = await params;
@@ -72,9 +73,10 @@ async function Page({ params }) {
           <p className="text-sm text-gray-400">
             Posted: {new Date(job.createdAt).toLocaleDateString()}
           </p>
+          
 
-          <Button
-            as="a"
+          <Link
+           
             href={`/jobs/${job._id}/apply`}
             color="primary"
             radius="full"
@@ -82,7 +84,7 @@ async function Page({ params }) {
             className="font-bold"
           >
             Apply Now
-          </Button>
+          </Link>
         </div>
       </div>
     </div>

@@ -3,12 +3,16 @@ import Link from "next/link";
 import { Button, Card } from "@heroui/react";
 import { authClient, useSession } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
+import { useRouter , useSearchParams  } from "next/navigation";
 
 export default function SignupPage() {
   const router = useRouter();
   const {data:session, isPending} = useSession();
 console.log(session?.user)
+
+const searchparams = useSearchParams();
+
+const redirectUrl = searchparams.get("redirect") || '/';
 
   const formSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +24,7 @@ console.log(session?.user)
     
 
     //Form field validation
-    if (!user.name | !user.email | !user.password || !user.role) {
+    if (!user.name || !user.email || !user.password || !user.role) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -57,7 +61,7 @@ console.log(session?.user)
 
     toast.success("Account created successfully!");
     setTimeout(() => {
-      router.push("/");
+      router.push(redirectUrl);
     }, 1000);
   };
 
