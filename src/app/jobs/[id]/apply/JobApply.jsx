@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 
 
 function JobApply({job, user}) {
-
+ 
 
     const handleSubmit = async(e) => {
     e.preventDefault();
@@ -17,6 +17,7 @@ function JobApply({job, user}) {
     const submittingData = {
         jobId : job?._id,
         jobTitle: job?.title,
+        applicantId: user?.id,
         applicantName: user?.name,
         applicantEmail: user?.email,
         ...formValue

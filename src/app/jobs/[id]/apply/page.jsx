@@ -3,6 +3,8 @@ import { getUserSession } from '@/lib/core/session'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import JobApply from './JobApply';
+import { div } from 'framer-motion/client';
+import { getApplicationByApplicant } from '@/lib/api/application';
 
 async function ApplyPage({params}) {
   const {id} =  await params;
@@ -24,12 +26,46 @@ async function ApplyPage({params}) {
   );
 }
 
+   const applications = await getApplicationByApplicant(user.id)
+   const plan = {
+    name: 'Free',
+    maxApplicationsPerMonth : 3
+   }
+
   const job = await getJobById(id)
 
    
 
   return (
-   <JobApply job={job} user ={user}></JobApply>
+ <div>
+  <h2 className="mb-4 text-lg font-semibold">
+    You have applied so far: {applications.length} out of{" "}
+    {plan.maxApplicationsPerMonth} this month
+  </h2>
+
+  {applications.length >= plan.maxApplicationsPerMonth ? (
+    <div className="rounded-xl border border-amber-200 bg-amber-50 p-6">
+      <h3 className="text-xl font-bold text-amber-700">
+        Application Limit Reached 
+      </h3>
+
+      <p className="mt-2 text-gray-600">
+        You have used all {plan.maxApplicationsPerMonth} applications available
+        in your {plan.name} plan this month.
+      </p>
+
+      <p className="mt-2 text-gray-600">
+        Upgrade your plan to apply for more jobs and unlock additional features.
+      </p>
+
+      <button className="mt-4 rounded-lg bg-[#5120E2] px-5 py-2 font-semibold text-white hover:bg-[#4019b5]">
+        Purchase Premium Plan
+      </button>
+    </div>
+  ) : (
+    <JobApply job={job} user={user} />
+  )}
+</div>
   )
 }
 
