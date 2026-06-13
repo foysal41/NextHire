@@ -9,7 +9,7 @@ import { authClient } from "@/lib/auth-client";
 const navLinks = [
   { label: "Browse Jobs", href: "/jobs" },
   { label: "Company", href: "/company" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Plans", href: "/plans" },
 ];
 
 function Navbar() {
