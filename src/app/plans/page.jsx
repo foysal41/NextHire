@@ -133,9 +133,15 @@ export default function PricingPage() {
             <li>✓ Salary insights</li>
           </ul>
 
-          <button className="mt-8 w-full rounded-xl bg-[#5120E2] py-3 font-semibold text-white">
-            Upgrade Now
-          </button>
+
+           <form action="/api/checkout_sessions" method="POST">
+      <section>
+        <button className="mt-8 w-full rounded-xl bg-[#5120E2] py-3 font-semibold text-white" type="submit" role="link">
+          Checkout
+        </button>
+      </section>
+    </form>
+    
         </div>
 
         {/* Premium */}
