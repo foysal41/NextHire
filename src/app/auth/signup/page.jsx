@@ -17,12 +17,15 @@ const redirectTo = searchparams.get("redirect") || '/';
   const formSubmit = async (e) => {
     e.preventDefault();
 
+
+
+
     //  1. form data গুলা collect করলাম।  চাইলে user কে console.log করে দেকতে পারি
     const formData = new FormData(e.currentTarget);
     const user = Object.fromEntries(formData.entries());
 
     
-
+    const plan = user.role === 'seeker' ? 'seeker_free' : 'recruiter_free'
     //Form field validation
     if (!user.name || !user.email || !user.password || !user.role) {
       toast.error("Please fill in all fields");
@@ -52,6 +55,7 @@ const redirectTo = searchparams.get("redirect") || '/';
       email: user.email,
       password: user.password,
       role:user.role,
+      plan: plan,
     });
 
     if (error) {

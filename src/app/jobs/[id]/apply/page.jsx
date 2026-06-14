@@ -5,6 +5,7 @@ import React from 'react'
 import JobApply from './JobApply';
 import { div } from 'framer-motion/client';
 import { getApplicationByApplicant } from '@/lib/api/application';
+import { getPlanById } from '@/lib/api/plan';
 
 async function ApplyPage({params}) {
   const {id} =  await params;
@@ -27,10 +28,11 @@ async function ApplyPage({params}) {
 }
 
    const applications = await getApplicationByApplicant(user.id)
-   const plan = {
-    name: 'Free',
-    maxApplicationsPerMonth : 3
-   }
+
+   const plan = await getPlanById(user?.plan || 'seeker_free');
+  //  console.log(plan)
+
+ 
 
   const job = await getJobById(id)
 

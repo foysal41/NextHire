@@ -1,9 +1,17 @@
+"use client";
+
+import { useState } from "react";
+
 export default function PricingPage() {
+  const [activeTab, setActiveTab] = useState("seeker");
+
   const seekerPlans = [
     {
       name: "Free",
+      id: "seeker_free",
       price: "$0",
       period: "/forever",
+      free: true,
       features: [
         "Save up to 10 jobs",
         "Apply to 3 jobs/month",
@@ -13,6 +21,7 @@ export default function PricingPage() {
     },
     {
       name: "Pro",
+      id: "seeker_pro",
       price: "$19",
       period: "/month",
       popular: true,
@@ -25,6 +34,7 @@ export default function PricingPage() {
     },
     {
       name: "Premium",
+      id: "seeker_premium",
       price: "$39",
       period: "/month",
       features: [
@@ -39,8 +49,10 @@ export default function PricingPage() {
   const recruiterPlans = [
     {
       name: "Free",
+      id: "recruiter_free",
       price: "$0",
       period: "/forever",
+      free: true,
       features: [
         "3 active job posts",
         "Applicant management",
@@ -49,6 +61,7 @@ export default function PricingPage() {
     },
     {
       name: "Growth",
+      id: "recruiter_growth",
       price: "$49",
       period: "/month",
       popular: true,
@@ -61,6 +74,7 @@ export default function PricingPage() {
     },
     {
       name: "Enterprise",
+      id: "recruiter_enterprise",
       price: "$149",
       period: "/month",
       features: [
@@ -72,173 +86,118 @@ export default function PricingPage() {
     },
   ];
 
+  const plans = activeTab === "seeker" ? seekerPlans : recruiterPlans;
+
   return (
-    <section className="bg-white py-20">
-  <div className="mx-auto max-w-7xl px-6">
-    <div className="text-center">
-      <h1 className="text-5xl font-bold text-gray-900">
-        Simple & Transparent Pricing
-      </h1>
+    <section className="min-h-screen bg-white px-4 py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="text-center">
+          <p className="text-sm font-semibold uppercase tracking-wide text-[#5120E2]">
+            Pricing
+          </p>
 
-      <p className="mt-4 text-lg text-gray-500">
-        Choose the perfect plan for your hiring or job search journey.
-      </p>
-    </div>
+          <h1 className="mt-3 text-4xl font-bold text-gray-950 md:text-5xl">
+            Simple & Transparent Pricing
+          </h1>
 
-    {/* Job Seeker Plans */}
-    <div className="mt-20">
-      <h2 className="mb-8 text-3xl font-bold text-gray-900">
-        For Job Seekers
-      </h2>
-
-      <div className="grid gap-8 md:grid-cols-3">
-        {/* Free */}
-        <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
-          <h3 className="text-2xl font-bold text-gray-900">Free</h3>
-
-          <div className="mt-4">
-            <span className="text-5xl font-bold text-gray-900">$0</span>
-            <span className="text-gray-500">/forever</span>
-          </div>
-
-          <ul className="mt-8 space-y-3 text-gray-600">
-            <li>✓ Save up to 10 jobs</li>
-            <li>✓ Apply to 3 jobs/month</li>
-            <li>✓ Basic profile</li>
-            <li>✓ Email alerts</li>
-          </ul>
-
-          <button className="mt-8 w-full rounded-xl border border-gray-300 py-3 font-semibold text-gray-800">
-            Get Started
-          </button>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-500">
+            Choose the perfect plan for your hiring or job search journey.
+          </p>
         </div>
 
-        {/* Pro */}
-        <div className="relative rounded-3xl border-2 border-[#5120E2] bg-white p-8 shadow-lg">
-          <span className="absolute right-6 top-6 rounded-full bg-[#5120E2] px-3 py-1 text-xs font-semibold text-white">
-            Most Popular
-          </span>
+        {/* Toggle */}
+        <div className="mt-10 flex justify-center">
+          <div className="inline-flex rounded-full border border-gray-200 bg-gray-100 p-1">
+            <button
+              type="button"
+              onClick={() => setActiveTab("seeker")}
+              className={`rounded-full px-6 py-2 text-sm font-semibold ${
+                activeTab === "seeker"
+                  ? "bg-[#5120E2] text-white"
+                  : "text-gray-600"
+              }`}
+            >
+              Job Seekers
+            </button>
 
-          <h3 className="text-2xl font-bold text-gray-900">Pro</h3>
-
-          <div className="mt-4">
-            <span className="text-5xl font-bold text-gray-900">$19</span>
-            <span className="text-gray-500">/month</span>
+            <button
+              type="button"
+              onClick={() => setActiveTab("recruiter")}
+              className={`rounded-full px-6 py-2 text-sm font-semibold ${
+                activeTab === "recruiter"
+                  ? "bg-[#5120E2] text-white"
+                  : "text-gray-600"
+              }`}
+            >
+              Recruiters
+            </button>
           </div>
-
-          <ul className="mt-8 space-y-3 text-gray-600">
-            <li>✓ Apply to 30 jobs/month</li>
-            <li>✓ Unlimited saved jobs</li>
-            <li>✓ Application tracking</li>
-            <li>✓ Salary insights</li>
-          </ul>
-
-
-           <form action="/api/checkout_sessions" method="POST">
-      <section>
-        <button className="mt-8 w-full rounded-xl bg-[#5120E2] py-3 font-semibold text-white" type="submit" role="link">
-          Checkout
-        </button>
-      </section>
-    </form>
-    
         </div>
 
-        {/* Premium */}
-        <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
-          <h3 className="text-2xl font-bold text-gray-900">Premium</h3>
+        {/* Dynamic Cards */}
+        <div className="mt-14 grid gap-8 md:grid-cols-3">
+          {plans.map((plan) => (
+            <div
+              key={plan.id}
+              className={`relative flex flex-col rounded-3xl bg-white p-8 transition hover:-translate-y-1 hover:shadow-xl ${
+                plan.popular
+                  ? "border-2 border-[#5120E2] shadow-lg"
+                  : "border border-gray-200 shadow-sm"
+              }`}
+            >
+              {plan.popular && (
+                <span className="absolute right-6 top-6 rounded-full bg-[#5120E2] px-3 py-1 text-xs font-semibold text-white">
+                  Popular
+                </span>
+              )}
 
-          <div className="mt-4">
-            <span className="text-5xl font-bold text-gray-900">$39</span>
-            <span className="text-gray-500">/month</span>
-          </div>
+              <h3 className="text-2xl font-bold text-gray-950">{plan.name}</h3>
 
-          <ul className="mt-8 space-y-3 text-gray-600">
-            <li>✓ Unlimited applications</li>
-            <li>✓ Profile boost</li>
-            <li>✓ Early job access</li>
-            <li>✓ Priority support</li>
-          </ul>
+              <div className="mt-5">
+                <span className="text-5xl font-bold text-gray-950">
+                  {plan.price}
+                </span>
+                <span className="text-gray-500">{plan.period}</span>
+              </div>
 
-          <button className="mt-8 w-full rounded-xl border border-gray-300 py-3 font-semibold text-gray-800">
-            Choose Premium
-          </button>
-        </div>
-      </div>
-    </div>
+              <ul className="mt-8 flex-1 space-y-4 text-gray-600">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex gap-3">
+                    <span className="font-bold text-[#5120E2]">✓</span>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
 
-    {/* Recruiter Plans */}
-    <div className="mt-24">
-      <h2 className="mb-8 text-3xl font-bold text-gray-900">
-        For Recruiters
-      </h2>
+              {plan.free ? (
+                <button
+                  type="button"
+                  className="mt-8 w-full rounded-xl border border-gray-300 py-3 font-semibold text-gray-800 transition hover:bg-gray-50"
+                >
+                  Get Started
+                </button>
+              ) : (
+                <form action="/api/checkout_sessions" method="POST">
+                  {/* Backend এই plan_id দিয়ে Stripe price detect করবে */}
+                  <input type="hidden" name="plan_id" value={plan.id} />
 
-      <div className="grid gap-8 md:grid-cols-3">
-        <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
-          <h3 className="text-2xl font-bold text-gray-900">Free</h3>
-
-          <div className="mt-4">
-            <span className="text-5xl font-bold text-gray-900">$0</span>
-            <span className="text-gray-500">/forever</span>
-          </div>
-
-          <ul className="mt-8 space-y-3 text-gray-600">
-            <li>✓ 3 active job posts</li>
-            <li>✓ Applicant management</li>
-            <li>✓ Standard visibility</li>
-          </ul>
-
-          <button className="mt-8 w-full rounded-xl border border-gray-300 py-3 font-semibold text-gray-800">
-            Get Started
-          </button>
-        </div>
-
-        <div className="relative rounded-3xl border-2 border-[#5120E2] bg-white p-8 shadow-lg">
-          <span className="absolute right-6 top-6 rounded-full bg-[#5120E2] px-3 py-1 text-xs font-semibold text-white">
-            Recommended
-          </span>
-
-          <h3 className="text-2xl font-bold text-gray-900">Growth</h3>
-
-          <div className="mt-4">
-            <span className="text-5xl font-bold text-gray-900">$49</span>
-            <span className="text-gray-500">/month</span>
-          </div>
-
-          <ul className="mt-8 space-y-3 text-gray-600">
-            <li>✓ 10 active job posts</li>
-            <li>✓ Applicant tracking</li>
-            <li>✓ Basic analytics</li>
-            <li>✓ Email support</li>
-          </ul>
-
-          <button className="mt-8 w-full rounded-xl bg-[#5120E2] py-3 font-semibold text-white">
-            Upgrade Now
-          </button>
-        </div>
-
-        <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
-          <h3 className="text-2xl font-bold text-gray-900">Enterprise</h3>
-
-          <div className="mt-4">
-            <span className="text-5xl font-bold text-gray-900">$149</span>
-            <span className="text-gray-500">/month</span>
-          </div>
-
-          <ul className="mt-8 space-y-3 text-gray-600">
-            <li>✓ 50 active job posts</li>
-            <li>✓ Advanced analytics</li>
-            <li>✓ Featured listings</li>
-            <li>✓ Priority support</li>
-          </ul>
-
-          <button className="mt-8 w-full rounded-xl border border-gray-300 py-3 font-semibold text-gray-800">
-            Contact Sales
-          </button>
+                  <button
+                    type="submit"
+                    role="link"
+                    className={`mt-8 w-full rounded-xl py-3 font-semibold transition ${
+                      plan.popular
+                        ? "bg-[#5120E2] text-white hover:bg-[#4019b5]"
+                        : "border border-gray-300 text-gray-800 hover:bg-gray-50"
+                    }`}
+                  >
+                    Checkout
+                  </button>
+                </form>
+              )}
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
   );
 }
