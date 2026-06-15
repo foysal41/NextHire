@@ -20,6 +20,7 @@ function JobApply({job, user}) {
         applicantId: user?.id,
         applicantName: user?.name,
         applicantEmail: user?.email,
+        status: 'applied',
         ...formValue
     
     };

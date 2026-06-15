@@ -37,10 +37,21 @@ export async function DashboardSidebar() {
   { icon: Gear, href: "/dashboard/seeker/settings", label: "Settings" },
 ];
 
+const adminNavLinks = [
+  { icon: House, href: "/dashboard/admin", label: "Dashboard" },
+  { icon: Person, href: "/dashboard/admin/users", label: "Users" },
+  { icon: House, href: "/dashboard/admin/companies", label: "Companies" },
+  { icon: Person, href: "/dashboard/admin/jobs", label: "Jobs" },
+  { icon: CreditCard, href: "/dashboard/admin/payments", label: "Payments" },
+  { icon: Gear, href: "/dashboard/admin/settings", label: "Settings" },
+];
+
+
 // creating object
 const navLinsMap = {
   seeker : seekerNavLinks,
-  recruiter: recruiterNavLinks
+  recruiter: recruiterNavLinks,
+  admin: adminNavLinks,
 }
 
 const navItems  = navLinsMap[user?.role || 'seeker'];
