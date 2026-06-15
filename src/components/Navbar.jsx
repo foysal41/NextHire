@@ -6,11 +6,6 @@ import Image from "next/image";
 import HireLoopLogo from "@/assets/next-hire-logo.png";
 import { authClient } from "@/lib/auth-client";
 
-const navLinks = [
-  { label: "Browse Jobs", href: "/jobs" },
-  { label: "Company", href: "/company" },
-  { label: "Plans", href: "/plans" },
-];
 
 
 
@@ -22,6 +17,34 @@ function Navbar() {
   const { data: session, isPending } = authClient.useSession();
 
   const user = session?.user;
+
+const navLinks = [
+  { label: "Browse Jobs", href: "/jobs" },
+  { label: "Company", href: "/company" },
+  { label: "Plans", href: "/plans" },
+];
+
+
+  const dashboardLinks = {
+  seeker: "/dashboard/seeker",
+  recruiter: "/dashboard/recruiter"
+
+
+}
+
+
+if(user?.email){
+  navLinks.push(
+    {
+      label: "Dashboard",
+      href: dashboardLinks[user?.role || 'seeker']
+    }
+  )
+}
+
+
+
+
 
   //2) Logout function add করেছি
   const handleLogout = async () => {
