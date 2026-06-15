@@ -12,6 +12,9 @@ const navLinks = [
   { label: "Plans", href: "/plans" },
 ];
 
+
+
+
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

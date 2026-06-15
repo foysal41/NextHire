@@ -1,6 +1,7 @@
 import { stripe } from "@/lib/stripe";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { createSubscription } from "@/lib/actions/subscription";
 
 export default async function Success({ searchParams }) {
   const { session_id } = await searchParams;
@@ -12,6 +13,7 @@ export default async function Success({ searchParams }) {
   const {
     status,
     customer_details: { email: customerEmail },
+    metadata
   } = await stripe.checkout.sessions.retrieve(session_id, {
     expand: ["line_items", "payment_intent"],
   });
@@ -21,6 +23,13 @@ export default async function Success({ searchParams }) {
   }
 
   if (status === "complete") {
+    const subInfo = {
+      email: customerEmail,
+      planId : metadata.planId
+    }
+
+    const result = await createSubscription(subInfo)
+    console.log(result)
     return (
       <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-white via-gray-50 to-purple-50 px-4 py-16">
         <div className="w-full max-w-2xl rounded-[32px] border border-gray-100 bg-white p-8 text-center shadow-2xl md:p-12">
